@@ -1,0 +1,12 @@
+Script Kiddieee
+
+
+The Minimax Algorithm
+
+Minimax Algorithm is a decision rule formulated for 2 player zero-sum games (Tic-Tac-Toe, Chess, Go, etc.). This algorithm sees a few steps ahead and puts itself in the shoes of its opponent. It keeps playing and exploring subsequent possible states until it reaches a terminal state resulting in a draw, a win, or a loss. Being in any of these possible terminal states has some utility for the AI — such as being in a ‘Win’ state is good (utility is positive), being in a ‘Loss’ state is bad (utility is negative), and being in a draw in neither good nor bad (utility is neutral).
+
+In our execution of the Minimax algorithm for solving Tic-Tac-Toe, it works by visualizing all future possible states of the board and constructs it in the form of a tree. When the current board state is given to the algorithm (the root of the tree), it splits into ’n’ branches (where n denotes the number of moves that can be chosen by the AI/number of empty cells where the AI can be placed). If any of these new states is a terminal state, no further splits are performed for this state and it is assigned a score the following way:
+
+    score = +1 (if AI wins)
+    score = -1 (if AI loses)
+    score= 0 (If a draw happens)

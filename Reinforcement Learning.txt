@@ -1,0 +1,27 @@
+Script Kiddieee
+
+
+Reinforcement Learning
+
+Say you are a dog owner. You pestered your spouse for months and finally got the little fucker, but this furball(our agent) needs to potty train. The physical world where our agent can interact and well, go doodoo, is our environment. The problem is simple — We want our canine buddy to do his business in the place we desire. But how do we tell it which place good or bad, without attempting to ‘talk dog’ and look stupid? Right, we use a reward system. Whenever our agent shits on our fancy carpet, it gets a negative reward(calling him a bad boy, revoking a treat, a violent boop on the nose, etc). Whenever it shits in front of our neighbor’s door who plays Justin Beiber on a loudspeaker at 2 am, it gets a positive reward(calling him the best boy, his favorite treat, belly rubs, etc). Over time, the agent learns that whenever it wants to let loose(a particular state), it’s better off soiling the neighbor’s pavement than the precious carpet, as it would result in him being in a better state, the one which grants a positive reward.
+
+
+Exploitation vs Exploration
+
+One of the fundamental tradeoffs in reinforcement learning is the exploitation vs exploration tradeoff. Exploitation means choosing the action which maximizes our reward(may lead to being stuck in a local optimum). Exploration means choosing an action regardless of the reward it provides(this helps us discover other local optimum which may lead us closer to the global optimum). Going all out in either one of them is harmful, all exploitation may lead to a suboptimal agent, and all exploration would just give us a stupid agent which keeps taking random actions.
+
+A widely used strategy to tackle this problem, which I have also used in my implementation, is the epsilon-decreasing strategy. It works as follows:
+
+    Initialize a variable ‘epsilon’, with a value between 0 and 1 (usually around 0.3)
+    Now with probability = epsilon, we explore and with probability = 1-epsilon, we exploit.
+    We decrease the value of epsilon over time until it becomes zero
+
+Using this strategy, the agent can explore better actions during the earlier stages of the training, and then it exploits the best actions in the later stages of the game. It’s kind of similar to how us humans function — We explore different options and seek new experiences in our early 20’s(exploration), and then we decide on a set career path and keep moving on that path(exploitation).
+Temporal Difference Learning
+
+The method of reinforcement learning used in this implementation is called temporal difference learning. It works on the principle that each state has a value attached to it. Say, if a state leads to the AI winning, it shall have a positive value(value = 1). If AI loses in some state, it shall have a negative value(value = -1). All the rest of the states would have a neutral value(value = 0). These are the initialized state values.
+
+Once a game is started, our agent computes all possible actions it can take in the current state and the new states which would result from each action. The values of these states are collected from a state_value vector, which contains values for all possible states in the game. The agent can then choose the action which leads to the state with the highest value(exploitation), or chooses a random action(exploration), depending on the value of epsilon.
+
+
+Using this update rule, the states that lead to a loss get a negative state value as well(whose magnitude depends on the learning rate). The agent learns that being in such a state may lead to a loss down the line, so it would try to avoid landing in this state unless necessary. On the other hand, the states that lead to a win, get a positive state value. The agent learns that being in such a state may lead to a win down the line, so it would be encouraged to be in this state.
